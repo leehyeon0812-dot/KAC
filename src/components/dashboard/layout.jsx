@@ -16,25 +16,27 @@ import { IconButton } from "./primitives";
 const networkModes = ["외부망 포털", "내부망 업무포털"];
 
 const railItems = [
-  { label: "대시보드", icon: LayoutDashboard, active: true },
-  { label: "매출", icon: BarChart3 },
+  { id: "dashboard", label: "대시보드", icon: LayoutDashboard, href: "#dashboard" },
+  { id: "sales", label: "매출", icon: BarChart3, href: "#dashboard" },
   { label: "정산", icon: ReceiptText },
-  { label: "임대", icon: Building2 },
+  { id: "rent", label: "임대", icon: Building2, href: "#rent-auto" },
   { label: "리스크", icon: AlertTriangle },
   { label: "설정", icon: Settings },
 ];
 
 const assetPath = (filename) => import.meta.env.BASE_URL + filename;
 
-export function DashboardShell({ children, sidebar }) {
+export function DashboardShell({ children, sidebar, activeRail = "dashboard" }) {
+  const hasSidebar = Boolean(sidebar);
+
   return (
     <div className="min-h-screen bg-[#f7f8f9] text-[#101214]">
       <div className="w-full">
         <TopNavigation />
         <div className="grid lg:grid-cols-[96px_minmax(0,1fr)]">
-          <IconRail />
+          <IconRail activeRail={activeRail} />
           <main className="min-w-0 p-5">
-            <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_390px]">
+            <div className={hasSidebar ? "grid gap-5 xl:grid-cols-[minmax(0,1fr)_390px]" : "space-y-5"}>
               <section className="min-w-0 space-y-5">{children}</section>
               {sidebar ? <aside className="space-y-5">{sidebar}</aside> : null}
             </div>
@@ -85,26 +87,38 @@ export function TopNavigation() {
   );
 }
 
-export function IconRail() {
+export function IconRail({ activeRail = "dashboard" }) {
   return (
     <aside className="hidden min-h-[calc(100vh-72px)] bg-[#0a0b0d] px-0 py-6 lg:flex lg:flex-col lg:items-center">
       <button className="mb-8 grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0a0b0d]">
         <Grid2X2 className="h-5 w-5" />
       </button>
       <div className="flex flex-1 flex-col items-center gap-3">
-        {railItems.map((item) => (
-          <button
+        {railItems.map((item) => {
+          const active = item.id === activeRail;
+          const className = active
+            ? "grid h-12 w-12 place-items-center rounded-2xl bg-[#e8fff5] text-[#05865e]"
+            : "grid h-12 w-12 place-items-center rounded-2xl text-[#8b929a] transition hover:bg-white/10 hover:text-white";
+
+          return item.href ? (
+            <a
+              key={item.label}
+              href={item.href}
+              title={item.label}
+              className={className}
+            >
+              <item.icon className="h-5 w-5" />
+            </a>
+          ) : (
+            <button
             key={item.label}
             title={item.label}
-            className={
-              item.active
-                ? "grid h-12 w-12 place-items-center rounded-2xl bg-[#e8fff5] text-[#05865e]"
-                : "grid h-12 w-12 place-items-center rounded-2xl text-[#8b929a] transition hover:bg-white/10 hover:text-white"
-            }
-          >
-            <item.icon className="h-5 w-5" />
-          </button>
-        ))}
+              className={className}
+            >
+              <item.icon className="h-5 w-5" />
+            </button>
+          );
+        })}
       </div>
       <button className="mt-8 grid h-11 w-11 place-items-center rounded-2xl text-[#8b929a] ring-1 ring-white/15 transition hover:bg-white/10 hover:text-white">
         <Menu className="h-5 w-5" />
