@@ -1,0 +1,66 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 14% 97%;
+    --foreground: 220 11% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 34% 12%;
+    --primary: 220 11% 7%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 222 34% 12%;
+    --muted: 210 11% 96%;
+    --muted-foreground: 214 8% 49%;
+    --accent: 158 86% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 348 83% 47%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 158 86% 43%;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font-size: 17px;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: #f7f8f9;
+  }
+
+  ::selection {
+    background: #baf3de;
+    color: #101214;
+  }
+
+  button,
+  input,
+  select,
+  table {
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font: inherit;
+  }
+}
+
+.recharts-wrapper * {
+  outline: none;
+}
