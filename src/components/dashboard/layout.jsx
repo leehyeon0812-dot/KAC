@@ -24,6 +24,8 @@ const railItems = [
   { label: "설정", icon: Settings },
 ];
 
+const assetPath = (filename) => import.meta.env.BASE_URL + filename;
+
 export function DashboardShell({ children, sidebar }) {
   return (
     <div className="min-h-screen bg-[#f7f8f9] text-[#101214]">
@@ -47,7 +49,7 @@ export function TopNavigation() {
   return (
     <header className="flex min-h-[72px] flex-wrap items-center gap-4 border-b border-[#e5e8eb] bg-white px-5 py-2 lg:px-8">
       <div className="flex min-w-[190px] items-center gap-3">
-        <img className="h-7 max-w-[178px] object-contain object-left" src="/kac-logo.png" alt="한국공항공사" />
+        <img className="h-7 max-w-[178px] object-contain object-left" src={assetPath("kac-logo.png")} alt="한국공항공사" />
       </div>
       <div className="hidden h-10 items-center rounded-lg border border-[#e5e8eb] bg-white p-1 text-[13px] font-bold text-[#6f7780] md:flex">
         {networkModes.map((mode) => (

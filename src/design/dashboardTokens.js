@@ -5,11 +5,13 @@ export const cardHeights = {
   comparison: "366px",
 };
 
+const assetPath = (filename) => import.meta.env.BASE_URL + filename;
+
 export const metricIconAssets = [
-  "/metric-sales.png",
-  "/metric-terminal.png",
-  "/metric-risk.png",
-  "/metric-rent.png",
+  assetPath("metric-sales.png"),
+  assetPath("metric-terminal.png"),
+  assetPath("metric-risk.png"),
+  assetPath("metric-rent.png"),
 ];
 
 export const chartPalette = {
